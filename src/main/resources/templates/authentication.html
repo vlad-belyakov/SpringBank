@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Аутентификация</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<h1>Страница аутентификации</h1>
+<form>
+    <div>
+        <label for="username">Номер пользователя:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+        <button type="button" th:onclick="|window.location='@{/main-page}'|">Войти</button>
+    </div>
+    <div>
+        <button type="button" th:onclick="|window.location='@{/registration}'|"> Регистрация</button>
+    </div>
+    <div th:if="${error}">
+        <p th:text="${error}" style="color:red;"></p>
+    </div>
+</form>
+</body>
+</html>
