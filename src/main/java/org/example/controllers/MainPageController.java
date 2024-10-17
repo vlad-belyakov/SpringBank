@@ -1,25 +1,17 @@
 package org.example.controllers;
 
 import org.example.service.ClientService;
-import org.example.user.UserClient;
+import org.example.entities.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1/main-page")
 public class MainPageController {
-
-    @GetMapping("/main-page")
-    public String handleLogInButton(Model model){
-        return "main-page";
-    }
-
-    @GetMapping
-    public String getInfo(@RequestParam("name") String client_name){
-        return client_name;
-    }
 
     private final ClientService clientService;
 
@@ -29,38 +21,53 @@ public class MainPageController {
         this.clientService = clientService;
     }
 
-    public boolean isExistsByPhoneNumber(String phoneNumber){
-        return clientService.isExistsByPhoneNumber(phoneNumber);
+    @GetMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public String getInfo(@RequestParam("name") String client_name){
+        return client_name;
     }
 
-    @GetMapping("/v1/all-clients")
-    public @ResponseBody List<UserClient> getAllOwners(){
+    @GetMapping("/all-clients")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseBody
+    public List<UserClient> getAllClients(){
         return clientService.findAllClients();
     }
 
-    @GetMapping("/v1/client/{id}")
-    public @ResponseBody UserClient getClientById(@PathVariable Long id){
+    @GetMapping("/client/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseBody
+    public UserClient getClientById(@PathVariable Long id){
         return clientService.findById(id);
     }
 
-    @GetMapping("/v1/client/{phoneNumber}")
-    public @ResponseBody UserClient getClientByPhoneNumber(@PathVariable String phoneNumber){
+    @GetMapping("/client/{phoneNumber}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @ResponseBody
+    public UserClient getClientByPhoneNumber(@PathVariable String phoneNumber){
         return clientService.findByPhoneNumber(phoneNumber);
     }
 
-    @PostMapping("/v1/create-client")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create-client")
     public UserClient createClient(@RequestBody UserClient client){
         return clientService.createClient(client);
     }
 
-    @DeleteMapping("/v1/delete-client/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @DeleteMapping("/delete-client/{id}")
     public void deleteClient(@PathVariable Long id){
         clientService.deleteClient(id);
     }
 
-    @PutMapping("/v1/update-client/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PutMapping("/update-client/{id}")
     public UserClient updateClient(@PathVariable Long id, @RequestBody UserClient client){
         return clientService.updateClient(client, id);
     }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PutMapping("/create-card/{id}")
+    public ResponseEntity<Void> createCard(@PathVariable Long id, )
 
 }

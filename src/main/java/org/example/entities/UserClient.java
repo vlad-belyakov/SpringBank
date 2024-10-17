@@ -1,15 +1,32 @@
-package org.example.user;
+package org.example.entities;
 
 import org.example.templates.Client;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
-@Component("userClient")
+@Component
 @Entity
 @Table(name = "clients")
 public class UserClient extends Client {
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "client_roles",
+            joinColumns = @JoinColumn(name = "id_client"),
+            inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Role> roles;
+
+    public Set<Role> getRoles(){
+        return roles;
+    }
+
+    public String[] getStringRoles(){
+        return roles.stream()
+                .map(Role::getRole) // Или использовать свой метод для извлечения строкового значения
+                .toArray(String[]::new);
+    }
 
     @Column(name = "client_name")
     private String name;
@@ -29,7 +46,7 @@ public class UserClient extends Client {
     @Column(name = "client_balance")
     private BigDecimal balance = new BigDecimal(0);
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
     @Column(name = "client_email")

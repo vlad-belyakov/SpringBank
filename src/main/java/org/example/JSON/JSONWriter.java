@@ -1,6 +1,6 @@
 package org.example.JSON;
 
-import org.example.user.UserClient;
+import org.example.entities.UserClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONWriter {

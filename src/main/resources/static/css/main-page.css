@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2b2b2b; /* Темный фон */
+    color: #e0e0e0; /* Светлый цвет текста */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+/* Верхняя панель */
+.info-bar {
+    width: 100%;
+    background-color: rgba(43, 43, 43, 0.8); /* Полупрозрачная панель с темным фоном */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #000080; /* Нижняя обводка */
+    margin-bottom: 20px;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-item img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Центральные кнопки для перевода и новой карты */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Уменьшена ширина кнопок */
+    margin-bottom: 40px;
+}
+
+.action-link {
+    background-color: #4a4a4a; /* Темный цвет кнопок */
+    color: #e0e0e0;
+    text-align: center;
+    padding: 20px; /* Уменьшен padding */
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px; /* Уменьшен размер шрифта */
+    flex: 1;
+    margin: 0 10px; /* Пространство между кнопками */
+    transition: background-color 0.3s ease;
+}
+
+.action-link:hover {
+    background-color: #616161; /* Более светлый серый при наведении */
+}
+
+/* Боковые кнопки */
+.button-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Привязка кнопок к левой стороне */
+    gap: 10px;
+    padding-left: 20px; /* Отступ слева для кнопок */
+}
+
+.side-btn {
+    width: 100%;
+    max-width: 250px; /* Ограничение ширины боковых кнопок */
+    background-color: #4a4a4a; /* Темный цвет кнопок */
+    color: #e0e0e0;
+    padding: 15px;
+    border: 2px solid #000080; /* Цвет обводки */
+    border-radius: 8px;
+    text-align: left; /* Выровнено по левому краю */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.side-btn:hover {
+    background-color: #616161; /* Темнее при наведении */
+}

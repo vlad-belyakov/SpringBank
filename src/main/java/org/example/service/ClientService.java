@@ -1,9 +1,8 @@
 package org.example.service;
 
 import org.example.repository.ClientRepository;
-import org.example.user.UserClient;
+import org.example.entities.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -12,22 +11,25 @@ import java.util.List;
 
 @Service
 @Lazy
-@DependsOn({"clientRepository"})
+//@DependsOn({"clientRepository"})
 public class ClientService {
-
 
         private final ClientRepository clientRepository;
 
+        private UserClient userClient;
+
         @Autowired
         public ClientService(ClientRepository clientRepository){
-            System.out.println("hiberService создан");
+            System.out.println("ClientService создан");
             this.clientRepository = clientRepository;
         }
 
         public UserClient createClient(UserClient client){
             clientRepository.save(client);
+            this.userClient = client;
             return client;
         }
+
         public List<UserClient> findAllClients(){
             List<UserClient> u = new ArrayList<>();
             for(UserClient c: clientRepository.findAll()){
@@ -35,7 +37,6 @@ public class ClientService {
             }
             return u;
         }
-
 
         public UserClient findById(Long id){
             if (clientRepository.existsById(id)) {
@@ -58,9 +59,13 @@ public class ClientService {
             }
         }
 
+        public UserClient getUserClient(){
+            return userClient;
+        }
+
         public UserClient findByPhoneNumber(String phoneNumber){
             if (clientRepository.existsByPhoneNumber(phoneNumber)){
-                return clientRepository.findByPhoneNumber(phoneNumber).get();
+                return ClientRepository.findByPhoneNumber(phoneNumber).get();
             } else {
                 throw new RuntimeException("нет пользователя с таким номером телефона");
             }

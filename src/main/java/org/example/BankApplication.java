@@ -11,10 +11,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "org.example.repository")
-@EntityScan(basePackages = "org.example.user")
+@EntityScan(basePackages = "org.example.entities")
 public class BankApplication {
 
-   private final ClientService clientService;
+    private final ClientService clientService;
 
     @Autowired
     public BankApplication(ClientService clientService){
