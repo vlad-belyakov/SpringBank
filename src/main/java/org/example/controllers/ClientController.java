@@ -28,7 +28,7 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseBody
     public List<UserClient> getAllClients(){
-        return clientService.findAllClients();
+        return clientService.findAll();
     }
 
     @GetMapping("/user/{id}")

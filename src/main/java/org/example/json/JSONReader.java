@@ -1,21 +1,21 @@
-package org.example.JSON;
+package org.example.json;
 
 import org.example.entities.UserClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JSONWriter {
+public class JSONReader {
 
-    public String writeUser(UserClient userClient) {
+    public UserClient readUser(String jsonString) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = null;
+        UserClient user = null;
 
         try {
-            jsonString = objectMapper.writeValueAsString(userClient);
+            user = objectMapper.readValue(jsonString, UserClient.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return jsonString;
+        return user;
     }
 
 }

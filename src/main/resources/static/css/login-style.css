@@ -1,3 +1,24 @@
+.error-message {
+    margin-bottom: 15px; /* Задает отступ от других элементов */
+    text-align: center;
+}
+
+.error-message p {
+    color: red;
+    margin: 0; /* Убираем отступы внутри ошибки */
+}
+
+/* Правка для кнопки входа */
+.submit-btn {
+    margin-top: 15px; /* Делаем отступ сверху, равный отступу ошибки */
+}
+
+/* Общая группировка */
+.form-group,
+.error-message,
+.submit-btn {
+    margin-bottom: 15px; /* Сохраняем единообразие отступов */
+}
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +27,14 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #000000; /* Фон всей страницы черный */
+    background-color: #000000; /* Черный фон страницы */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.registration-container {
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,13 +48,13 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    border: 1px solid #cc0066; /* Темно-розовая рамка формы */
+    border: 1px solid #0056b3; /* Темно-синяя рамка формы */
 }
 
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #cc0066; /* Темно-розовый цвет текста */
+    color: #0056b3; /* Темно-синий цвет заголовка */
 }
 
 .form-group {
@@ -43,13 +64,13 @@ h2 {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #cc0066; /* Темно-розовый цвет текста */
+    color: #0056b3; /* Темно-синий цвет текста */
 }
 
 .form-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #cc0066; /* Темно-розовая рамка полей ввода */
+    border: 1px solid #0056b3; /* Темно-синяя рамка полей ввода */
     border-radius: 4px;
     background-color: #ffffff; /* Белый фон внутри полей ввода */
     color: #000000; /* Черный цвет текста внутри полей ввода */
@@ -57,14 +78,14 @@ h2 {
 }
 
 .form-group input:focus {
-    border-color: #ff6699; /* Светлее розовый цвет при фокусе */
+    border-color: #3399ff; /* Светло-синий цвет при фокусе */
     outline: none;
 }
 
 .submit-btn {
     width: 100%;
     padding: 10px;
-    background-color: #cc0066; /* Темно-розовая кнопка */
+    background-color: #0056b3; /* Темно-синяя кнопка */
     border: none;
     border-radius: 4px;
     color: white;
@@ -74,19 +95,20 @@ h2 {
 }
 
 .submit-btn:hover {
-    background-color: #99004d; /* Более темный розовый цвет при наведении */
+    background-color: #003d80; /* Более тёмный синий при наведении */
 }
 
 /* Стили для кнопки регистрации */
 .register-link {
-    text-align: center; /* Центрируем ссылку */
+    text-align: center; /* Центрирование ссылки */
     margin-top: 15px; /* Отступ сверху */
 }
 
 .register-btn {
-    display: inline-block; /* Чтобы сделать элемент блочным */
-    padding: 10px 15px; /* Отступы внутри кнопки */
-    background-color: #cc0066; /* Темно-розовый фон */
+    display: block; /* Сделаем кнопку блочной */
+    width: 100%; /* Задаем полную ширину */
+    padding: 10px; /* Отступы внутри кнопки */
+    background-color: #0056b3; /* Темно-синий фон */
     color: white; /* Белый цвет текста */
     text-align: center; /* Центрируем текст */
     text-decoration: none; /* Убираем подчеркивание */
@@ -95,5 +117,5 @@ h2 {
 }
 
 .register-btn:hover {
-    background-color: #99004d; /* Более темный розовый цвет при наведении */
+    background-color: #003d80; /* Более тёмный синий при наведении */
 }

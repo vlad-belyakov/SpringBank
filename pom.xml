@@ -31,20 +31,10 @@
 
     <dependencies>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -160,6 +150,25 @@
     <build>
 
         <resources>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include> <!-- Убедитесь, что html файлы включены -->
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>static/**</include> <!-- Убедитесь, что статические ресурсы включены -->
+                </includes>
+            </resource>
+
             <!--Add both resource nodes, if you have configuration files in both directories. If you add only one resource node, it will only compile the xml and properties files in the directory configured by this node-->
             <resource>
                 <directory>src/main/resources</directory>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <title>Главная страница банка</title>
+  <link rel="stylesheet" href="/static/css/main-page-style.css">
+</head>
+<body>
+<!-- Верхнее меню -->
+<header class="navbar">
+  <div class="logo">
+    <h1><span class="logo-highlight">Your</span> Bank</h1>
+  </div>
+  <nav class="nav-links">
+    <a href="/about">О нас</a>
+    <a href="/services">Услуги</a>
+    <a href="/contacts">Контакты</a>
+  </nav>
+</header>
+
+<!-- Герой-секция -->
+<section class="hero">
+  <div class="hero-content">
+    <h2>Ваши финансы — наш приоритет</h2>
+    <p>Современные решения для управления вашими деньгами.</p>
+    <a href="/open-account" class="cta-btn">Открыть счет</a>
+  </div>
+</section>
+
+<!-- Основной контент -->
+<main class="main-container">
+  <section class="info-section">
+    <div class="info-card">
+      <h3>Баланс</h3>
+      <p>12,345 ₽</p>
+    </div>
+    <div class="info-card">
+      <h3>Счет</h3>
+      <p>0123 4567 8910</p>
+    </div>
+  </section>
+
+  <section class="actions-section">
+    <a href="/transfer" class="action-btn">Перевод средств</a>
+    <a href="/new-card" class="action-btn">Оформить карту</a>
+  </section>
+
+  <section class="side-buttons">
+    <button class="side-btn">Профиль</button>
+    <button class="side-btn">Настройки</button>
+    <button class="side-btn">Помощь</button>
+  </section>
+
+  <!-- Раздел с картой -->
+  <section class="map-section">
+    <h3>Где мы</h3>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35979.43315224114!2d37.31085816781222!3d55.69395000379045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54e301da4ae69%3A0x27e1ef135ea4ed00!2z0JjQvdC90L7QstCw0YbQuNC-0L3QvdGL0Lkg0YbQtdC90YLRgCDQodC60L7Qu9C60L7QstC-C-LCDQnNC-0YHQutC-0LLRgdC60LDRjyDQvtCx0LsuLCDQoNC-0YHRgdC40Y8!5e0!3m2!1sru!2sus!4v1732219778052!5m2!1sru!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+</main>
+
+<!-- Подвал -->
+<footer class="footer">
+  <p>&copy; 2024 Your Bank. Все права защищены.</p>
+</footer>
+
+</body>
+</html>

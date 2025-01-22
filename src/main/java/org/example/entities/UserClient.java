@@ -1,6 +1,6 @@
 package org.example.entities;
 
-import org.example.templates.Client;
+import org.example.template.Client;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 

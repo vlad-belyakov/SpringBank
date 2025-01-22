@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация в банке</title>
-    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" href="/static/css/registration-style.css">
 </head>
 <body>
 <div class="registration-container">
     <div class="form-box">
         <h2>Регистрация в банке</h2>
-        <form th:action="@{/register}" method="post" class="register-form">
+        <form th:action="@{/v1/registration}" method="post" class="register-form">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             <div class="form-group">
                 <label for="firstName">Имя</label>
                 <input type="text" id="firstName" name="firstName" placeholder="Введите ваше имя" required>
@@ -41,12 +42,12 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
             </div>
             <div th:if="${error}" style="color: red;">
-                <p th:text="${error}"></p>
+                <p th:text="${error}">такой пользователь уже существует</p>
             </div>
-            <button type="submit" class="submit-btn">Войти</button>
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
         </form>
-        <div class="register-link">
-            <a th:href="@{/register}" class="register-btn">Регистрация</a>
+        <div class="login-link">
+            <a th:href="@{/v1/login}" class="register-btn">Войти</a>
         </div>
     </div>
 </div>

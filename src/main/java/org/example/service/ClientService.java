@@ -25,20 +25,40 @@ public class ClientService {
         }
 
         public UserClient createClient(UserClient client){
+            System.out.println("создание клиента");
             clientRepository.save(client);
             this.userClient = client;
             return client;
         }
 
-        public List<UserClient> findAllClients(){
+        public List<UserClient> findAll(){
+            System.out.println("поиск всех клиентов");
             List<UserClient> u = new ArrayList<>();
-            for(UserClient c: clientRepository.findAll()){
-                u.add(c);
+            if (u.size() > 0) {
+                for (UserClient c : clientRepository.findAll()) {
+                    u.add(c);
+                }
+            } else {
+                System.out.println("пользователей нет");
             }
             return u;
         }
 
+    public List<UserClient> findAllClients(){
+        System.out.println("поиск всех клиентов");
+        List<UserClient> u = new ArrayList<>();
+        if (u.size() > 0) {
+            for (UserClient c : clientRepository.findAllClients()) {
+                u.add(c);
+            }
+        } else {
+            System.out.println("пользователей нет");
+        }
+        return u;
+    }
+
         public UserClient findById(Long id){
+            System.out.println("поиск по айд");
             if (clientRepository.existsById(id)) {
                 return clientRepository.findById(id).get();
             } else {
@@ -46,11 +66,13 @@ public class ClientService {
             }
         }
 
-        public boolean isExistsByPhoneNumber(String phoneNumber){
+        public boolean isExists(String phoneNumber){
+            System.out.println("проверка на существование по телефу");
             return clientRepository.existsByPhoneNumber(phoneNumber);
         }
 
         public UserClient updateClient(UserClient client, Long id){
+            System.out.println("обновление клиента");
             if (clientRepository.existsById(id)) {
                 clientRepository.save(client);
                 return client;
@@ -60,18 +82,26 @@ public class ClientService {
         }
 
         public UserClient getUserClient(){
+            System.out.println("получение клиента");
             return userClient;
         }
 
+        public boolean isExists(Long id){
+            System.out.println("проверка существования по айди");
+            return clientRepository.existsById(id);
+        }
+
         public UserClient findByPhoneNumber(String phoneNumber){
+            System.out.println("поиск по номеру телефона");
             if (clientRepository.existsByPhoneNumber(phoneNumber)){
-                return ClientRepository.findByPhoneNumber(phoneNumber).get();
+                return clientRepository.findByPhoneNumber(phoneNumber).get();
             } else {
                 throw new RuntimeException("нет пользователя с таким номером телефона");
             }
         }
 
         public void deleteClient(Long id){
+            System.out.println("удаление по айди");
             if(clientRepository.existsById(id)){
                 clientRepository.deleteById(id);
             } else {

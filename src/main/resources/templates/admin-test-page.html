@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
     <title>Вход в банк</title>
     <link rel="stylesheet" href="/static/css/login-style.css">
+    <!--th: сверху надо удалить если че-->
 </head>
 <body>
 <div class="login-container">
     <div class="form-box">
-        <h2>Вход в банк</h2>
+        <h2>админ тест</h2>
         <form action="/v1/login" method="post" class="login-form">
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             <div class="form-group">
                 <label for="phone_number">Номер телефона</label>
                 <input type="tel" id="phone_number" name="username" placeholder="Введите ваш номер телефона" required>
@@ -23,13 +22,8 @@
                 <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
             </div>
 
-            <div class="error-message" th:if="${error}">
-                <p th:text="${error}">Неверный номер телефона или пароль. Попробуйте снова.</p>
-            </div>
-
-            <!-- Сообщение о выходе -->
-            <div th:if="${logout}" style="color: green;">
-                <p th:text="${logout}"></p>
+            <div th:if="${param.error}" style="color: red;">
+                <p>Неверный номер телефона или пароль. Попробуйте снова.</p>
             </div>
 
             <button type="submit" class="submit-btn">Войти</button>

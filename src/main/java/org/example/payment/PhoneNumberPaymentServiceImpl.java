@@ -1,7 +1,7 @@
 package org.example.payment;
 
-import org.example.templates.PhoneNumberPayment;
-import org.example.templates.WebMoneyPayment;
+import org.example.template.PhoneNumberPayment;
+import org.example.template.WebMoneyPayment;
 
 public class PhoneNumberPaymentServiceImpl implements PhoneNumberPayment, WebMoneyPayment {
     @Override

@@ -20,7 +20,11 @@ public interface ClientRepository extends JpaRepository<UserClient, Long> {
     @Query(value = "UPDATE clients SET client_balance = :#{#client.balance} WHERE client_id = :#{#client.id}", nativeQuery = true)
     void updateBalanceUser(@Param("client") UserClient client);
     public UserClient findByCardNumber(String cardNumber);
-    public static Optional<UserClient> findByPhoneNumber(String phoneNumber);
+    public Optional<UserClient> findByPhoneNumber(String phoneNumber);
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT * FROM clients", nativeQuery = true)
+    public List<UserClient> findAllClients();
     public boolean existsByPhoneNumber(String phoneNumber);
     @Transactional
     public void deleteById(Long id);

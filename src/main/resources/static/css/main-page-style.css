@@ -1,0 +1,343 @@
+/*
+!* Общие стили *!
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #f5f5f5;
+    background-color: #1a1a1a; !* Черный фон *!
+}
+
+!* Верхнее меню *!
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #0056b3; !* Синий цвет для подчеркивания *!
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    color: #f5f5f5;
+}
+
+.logo .logo-highlight {
+    color: #0056b3; !* Синий акцент *!
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #0056b3; !* Синий цвет при наведении *!
+}
+
+!* Герой-секция *!
+.hero {
+    background: linear-gradient(135deg, #1a1a1a, #333333);
+    color: #f5f5f5;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.cta-btn {
+    background-color: #0056b3;
+    color: #f5f5f5;
+    padding: 12px 25px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #004080; !* Темный синий оттенок при наведении *!
+}
+
+!* Основной контент *!
+.main-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.info-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 20px;
+    color: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    text-align: center;
+}
+
+.actions-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.action-btn {
+    background-color: #0056b3;
+    color: #f5f5f5;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #004080;
+}
+
+!* Боковые кнопки *!
+.side-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.side-btn {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.side-btn:hover {
+    background-color: #0056b3; !* Синий акцент при наведении *!
+    transform: scale(1.05);
+}
+
+!* Подвал *!
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    font-size: 14px;
+}
+*/
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #f5f5f5;
+    background-color: #1a1a1a; /* Черный фон */
+}
+
+/* Верхнее меню */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #0056b3; /* Синий цвет для подчеркивания */
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    color: #f5f5f5;
+}
+
+.logo .logo-highlight {
+    color: #0056b3; /* Синий акцент */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #0056b3; /* Синий цвет при наведении */
+}
+
+/* Герой-секция */
+.hero {
+    background: linear-gradient(135deg, #1a1a1a, #333333);
+    color: #f5f5f5;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.cta-btn {
+    background-color: #0056b3;
+    color: #f5f5f5;
+    padding: 12px 25px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #004080; /* Темный синий оттенок при наведении */
+}
+
+/* Основной контент */
+.main-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.info-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 20px;
+    color: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    text-align: center;
+}
+
+.actions-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.action-btn {
+    background-color: #0056b3;
+    color: #f5f5f5;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #004080;
+}
+
+/* Боковые кнопки */
+.side-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.side-btn {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.side-btn:hover {
+    background-color: #0056b3; /* Синий акцент при наведении */
+    transform: scale(1.05);
+}
+
+/* Раздел с картой */
+.map-section {
+    text-align: center;
+    margin-top: 40px; /* Отступ сверху */
+}
+
+.map-section h3 {
+    font-size: 24px;
+    color: #f5f5f5;
+    margin-bottom: 20px;
+}
+
+.map-section iframe {
+    border: 0;
+    max-width: 100%;
+    height: 450px;
+    margin: 0 auto; /* Центрируем карту */
+}
+
+/* Подвал */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    font-size: 14px;
+}
