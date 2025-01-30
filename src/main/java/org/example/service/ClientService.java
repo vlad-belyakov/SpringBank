@@ -4,6 +4,7 @@ import org.example.repository.ClientRepository;
 import org.example.entities.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class ClientService {
         }
 
         public boolean isExists(String phoneNumber){
-            System.out.println("проверка на существование по телефу");
+            System.out.println("проверка на существование по телефону");
             return clientRepository.existsByPhoneNumber(phoneNumber);
         }
 
@@ -93,11 +94,8 @@ public class ClientService {
 
         public UserClient findByPhoneNumber(String phoneNumber){
             System.out.println("поиск по номеру телефона");
-            if (clientRepository.existsByPhoneNumber(phoneNumber)){
-                return clientRepository.findByPhoneNumber(phoneNumber).get();
-            } else {
-                throw new RuntimeException("нет пользователя с таким номером телефона");
-            }
+            return clientRepository.findByPhoneNumber(phoneNumber)
+                    .orElseThrow(() -> new RuntimeException("User not found with phone number: " + phoneNumber));
         }
 
         public void deleteClient(Long id){

@@ -4,67 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1772219e-e7c1-49bf-af36-27e33e686553" name="Changes" comment="добавляю spring security">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/AdminTestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/ClientTestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-test-page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/registration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user-test-page.html" afterDir="false" />
+    <list default="true" id="1772219e-e7c1-49bf-af36-27e33e686553" name="Changes" comment="немного исправлений багов">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6f7ce37c-0545-4211-bf7c-cace8cb8f620.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6f7ce37c-0545-4211-bf7c-cace8cb8f620.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6f7ce37c-0545-4211-bf7c-cace8cb8f620/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6f7ce37c-0545-4211-bf7c-cace8cb8f620/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BankApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JSON/JSONReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/json/JSONReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JSON/JSONWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/json/JSONWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JWT/JWTKeyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTKeyGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JWT/JWTTokenValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTTokenValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/RegistrationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/payment/CreditCardPaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/payment/CreditCardPaymentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/payment/PhoneNumberPaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/payment/PhoneNumberPaymentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/payment/TerminalPaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/payment/TerminalPaymentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTKeyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTKeyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTTokenValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTTokenValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/security/CustomClientDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/security/CustomClientDetailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ClientDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ClientDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/templates/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/template/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/templates/CreditCardPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/template/CreditCardPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/templates/PhoneNumberPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/template/PhoneNumberPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/templates/WebMoneyPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/template/WebMoneyPayment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/login-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main-page.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main-page-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/registration-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/BankApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/BankApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JSON/JSONReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JSON/JSONReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JSON/JSONWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JSON/JSONWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTKeyGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTKeyGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTTokenValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTTokenValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/AuthController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/ClientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/MainPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/MainPageController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/entities/UserClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/entities/UserClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/payment/CreditCardPaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/payment/CreditCardPaymentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/payment/PhoneNumberPaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/payment/PhoneNumberPaymentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/payment/TerminalPaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/payment/TerminalPaymentServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/repository/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/repository/ClientRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/security/Authentication.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/security/UserFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/security/UserFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/service/ClientService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/templates/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/templates/CreditCardPayment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/templates/PhoneNumberPayment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/templates/WebMoneyPayment.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +125,9 @@
       <workItem from="1732035444074" duration="18076000" />
       <workItem from="1732560994660" duration="10564000" />
       <workItem from="1732814707120" duration="2527000" />
+      <workItem from="1737534794190" duration="99000" />
+      <workItem from="1737973621263" duration="20619000" />
+      <workItem from="1738145941017" duration="13422000" />
     </task>
     <task id="LOCAL-00001" summary="добавил html страницы">
       <option name="closed" value="true" />
@@ -196,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729172462003</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="немного исправлений багов">
+      <option name="closed" value="true" />
+      <created>1737534883193</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737534883193</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +192,7 @@
     </ignored-roots>
     <MESSAGE value="добавил html страницы" />
     <MESSAGE value="добавляю spring security" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавляю spring security" />
+    <MESSAGE value="немного исправлений багов" />
+    <option name="LAST_COMMIT_MESSAGE" value="немного исправлений багов" />
   </component>
 </project>

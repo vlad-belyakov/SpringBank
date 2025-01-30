@@ -51,8 +51,6 @@ public class BankApplication {
             response.subscribe(body -> System.out.println("Response: " + body));
 
             System.out.println("robit");*/
-
-
         };
     }
 }

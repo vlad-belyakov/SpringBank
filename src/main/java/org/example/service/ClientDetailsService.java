@@ -1,3 +1,4 @@
+/*
 package org.example.service;
 
 import org.example.entities.Role;
@@ -36,3 +37,4 @@ public class ClientDetailsService implements UserDetailsService {
                 .build();
     }
 }
+*/

@@ -32,6 +32,7 @@ public class LoginController {
     public String showLoginPage(@RequestParam(value = "error", required = false) String error,
                                 @RequestParam(value = "logout", required = false) String logout,
                                 Model model) {
+        System.out.println("гет запрос логина");
         for (UserClient u: clientService.findAllClients()){
             System.out.println(u.getPhoneNumber());
         }
@@ -47,11 +48,12 @@ public class LoginController {
     @Autowired
     public LoginController(ClientService clientService,
                            AuthenticationManager authenticationManager,
-                           CustomClientDetailService customClientDetailService){
+                           CustomClientDetailService customClientDetailService,
+                           Key jwtKey){
         this.authenticationManager = authenticationManager;
         this.customClientDetailService = customClientDetailService;
         this.clientService = clientService;
-        this.jwtKey = JWTKeyGenerator.generateKey();
+        this.jwtKey = jwtKey;
     }
 
     @PostMapping
@@ -60,8 +62,7 @@ public class LoginController {
                             @RequestParam("password") String password,
                             HttpServletResponse response,
                             Model model) {
-        System.out.println("пост запрос");
-        System.out.println(phoneNumber);
+        System.out.println("пост запрос логина по номеру: " + phoneNumber);
         /*try {
             // Создаем объект токена для аутентификации
             UsernamePasswordAuthenticationToken authenticationToken =
@@ -96,20 +97,25 @@ public class LoginController {
                     new UsernamePasswordAuthenticationToken(phoneNumber, password)
             );
 
+            SecurityContextHolder.getContext().setAuthentication(authentication);//
+
             // Генерация JWT токена
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = JWTKeyGenerator.generateToken(userDetails, jwtKey);
 
             // Устанавливаем JWT в заголовок ответа
             response.setHeader("Authorization", "Bearer " + token);
+            System.out.println("JWT токен генерируется: " + token);
 
             // Перенаправляем на главную страницу
             return "redirect:/v1/main-page";
 
-        } catch (Exception e) {
+        } catch (BadCredentialsException e) {
             model.addAttribute("error", "Неверные учетные данные. Повторите попытку.");
-            return "login"; // Возврат на страницу логина с ошибкой
+        } catch (Exception e) {
+            model.addAttribute("error", "Произошла ошибка. Повторите попытку.");
         }
+        return "login"; // Возврат на страницу логина с ошибкой
     }
 
 }

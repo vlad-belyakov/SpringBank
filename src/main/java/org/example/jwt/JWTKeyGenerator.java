@@ -26,7 +26,7 @@ public class JWTKeyGenerator {
                 .claim("roles", roles)
                 .setIssuer("yourbank")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000))  // 1 hour expiration
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))  // 1 час срок действия
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

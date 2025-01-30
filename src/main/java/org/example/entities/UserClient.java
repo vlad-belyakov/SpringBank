@@ -111,7 +111,7 @@ public class UserClient extends Client {
 
     @Override
     public String getCardNumber() {
-        return null;
+        return cardNumber;
     }
 
     @Override

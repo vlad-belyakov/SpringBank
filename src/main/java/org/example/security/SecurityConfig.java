@@ -14,23 +14,23 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.security.Key;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig{
 
     private final CustomClientDetailService cc;
-
+    private final Key jwtKey;
     @Autowired
-    public SecurityConfig(CustomClientDetailService cc){
+    public SecurityConfig(CustomClientDetailService cc, Key jwtKey) {
         this.cc = cc;
+        this.jwtKey = jwtKey;  // Получаем ключ через инъекцию
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 
@@ -43,6 +43,8 @@ public class SecurityConfig{
                 .withUser("ad")
                 .password(passwordEncoder().encode("ad"))
                 .authorities("ADMIN");*/
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(jwtKey);
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -64,7 +66,7 @@ public class SecurityConfig{
                         .loginPage("/v1/login")
                         .loginProcessingUrl("/v1/login")
                         .failureUrl("/v1/login?error=true")
-                        .defaultSuccessUrl("/v1/main-page", true)
+                        .defaultSuccessUrl("/v1/main-page", false)//
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -74,7 +76,11 @@ public class SecurityConfig{
                         .clearAuthentication(true) // Очищаем контекст аутентификации
                         .deleteCookies("JSESSIONID")  // Удаляем cookie сессии
                         .permitAll()
-                ).addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendRedirect("/v1/login?error=true"); // Перенаправление при ошибке аутентификации
+                        }));
         return http.build();
     }
 }

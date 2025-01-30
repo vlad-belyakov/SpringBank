@@ -14,20 +14,18 @@ import java.util.Optional;
 @Repository
 public interface ClientRepository extends JpaRepository<UserClient, Long> {
 
-    public UserClient findByEmail(String email);
+    UserClient findByEmail(String email);
     @Transactional
     @Modifying
     @Query(value = "UPDATE clients SET client_balance = :#{#client.balance} WHERE client_id = :#{#client.id}", nativeQuery = true)
     void updateBalanceUser(@Param("client") UserClient client);
-    public UserClient findByCardNumber(String cardNumber);
-    public Optional<UserClient> findByPhoneNumber(String phoneNumber);
+    UserClient findByCardNumber(String cardNumber);
+    Optional<UserClient> findByPhoneNumber(String phoneNumber);
     @Transactional
-    @Modifying
     @Query(value = "SELECT * FROM clients", nativeQuery = true)
-    public List<UserClient> findAllClients();
-    public boolean existsByPhoneNumber(String phoneNumber);
-    @Transactional
-    public void deleteById(Long id);
-    public Optional<UserClient> findById(Long id);
-    public boolean existsById(Long id);
+    List<UserClient> findAllClients();
+    boolean existsByPhoneNumber(String phoneNumber);
+    void deleteById(Long id);
+    Optional<UserClient> findById(Long id);
+    boolean existsById(Long id);
 }
