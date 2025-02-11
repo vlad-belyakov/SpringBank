@@ -2,7 +2,6 @@ package org.example.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class JWTKeyGenerator {
 
     public static Key generateKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return io.jsonwebtoken.security.Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
     public static String generateToken(UserDetails userDetails, Key key) {

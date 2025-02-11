@@ -18,13 +18,10 @@ public class AdminTestController {
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showAdminTestPage() {
-        // Получаем объект Authentication из SecurityContextHolder
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Получаем коллекцию авторитетов (ролей)
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        // Преобразуем коллекцию авторитетов в список строковых представлений ролей
         List<String> listt = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();

@@ -28,4 +28,5 @@ public interface ClientRepository extends JpaRepository<UserClient, Long> {
     void deleteById(Long id);
     Optional<UserClient> findById(Long id);
     boolean existsById(Long id);
+    void deleteAll();
 }

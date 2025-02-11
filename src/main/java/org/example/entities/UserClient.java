@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -16,7 +17,7 @@ public class UserClient extends Client {
     @JoinTable(name = "client_roles",
             joinColumns = @JoinColumn(name = "id_client"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public Set<Role> getRoles(){
         return roles;
@@ -24,8 +25,15 @@ public class UserClient extends Client {
 
     public String[] getStringRoles(){
         return roles.stream()
-                .map(Role::getRole) // Или использовать свой метод для извлечения строкового значения
+                .map(Role::getRole)
                 .toArray(String[]::new);
+    }
+
+    public void addRole(String role){
+        Role rol = new Role();
+        rol.setRole(role);
+        System.out.println("UC userClient role: " + rol.getRole());
+        roles.add(rol);
     }
 
     @Column(name = "client_name")

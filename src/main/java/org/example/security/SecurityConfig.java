@@ -12,40 +12,30 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.security.Key;
+
+
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig{
+public class SecurityConfig {
 
     private final CustomClientDetailService cc;
-    private final Key jwtKey;
+    private final JWTAuthenticationFilter jwtAuthenticationFilter;
+
     @Autowired
-    public SecurityConfig(CustomClientDetailService cc, Key jwtKey) {
+    public SecurityConfig(CustomClientDetailService cc, JWTAuthenticationFilter jwtAuthenticationFilter) {
         this.cc = cc;
-        this.jwtKey = jwtKey;  // Получаем ключ через инъекцию
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-
-        /*authenticationManagerBuilder
-                .inMemoryAuthentication()
-                .withUser("us")
-                .password(passwordEncoder().encode("us"))
-                .authorities("USER")
-                .and()
-                .withUser("ad")
-                .password(passwordEncoder().encode("ad"))
-                .authorities("ADMIN");*/
-        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(jwtKey);
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(cc).passwordEncoder(passwordEncoder());
@@ -56,31 +46,18 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/v1/registration/**", "/v1/login",
-                                "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                        .requestMatchers("/v1/registration", "/v1/login", "/css/**", "/js/**", "/images/**", "/static/**", "/favicon.ico")
+                        .permitAll()
                         .requestMatchers("/v1/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/v1/user/**").hasAnyAuthority("USER", "ADMIN")
-                        .anyRequest().authenticated()  // Все остальные запросы требуют аутентификации
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/v1/login")
-                        .loginProcessingUrl("/v1/login")
-                        .failureUrl("/v1/login?error=true")
-                        .defaultSuccessUrl("/v1/main-page", false)//
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/login?logout")
-                        .invalidateHttpSession(true) // Инвалидируем сессию
-                        .clearAuthentication(true) // Очищаем контекст аутентификации
-                        .deleteCookies("JSESSIONID")  // Удаляем cookie сессии
-                        .permitAll()
-                )
-                .exceptionHandling(exception -> exception
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint((request, response, authException) -> {
-                            response.sendRedirect("/v1/login?error=true"); // Перенаправление при ошибке аутентификации
-                        }));
+                            response.sendRedirect("/v1/login?error=true");
+                        })
+                );
         return http.build();
     }
 }

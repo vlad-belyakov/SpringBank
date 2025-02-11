@@ -3,13 +3,14 @@ package org.example.controllers;
 import org.example.entities.UserClient;
 import org.example.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/v1/registration")
@@ -37,13 +38,12 @@ public class RegistrationController {
     @PostMapping
     public String registerUser(String firstName, String lastName, String email, String username, String password, String confirmPassword, Model model) {
         System.out.println("начинается регистрация");
-        // Логика регистрации
+
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Пароли не совпадают");
             return "registration";
         }
 
-        // Проверка на наличие пользователя в БД и создание нового пользователя
         if (clientService.isExists(username)) {
             model.addAttribute("error", "Пользователь с таким номером телефона уже существует");
             return "registration";
@@ -56,7 +56,12 @@ public class RegistrationController {
                 .setSurname(lastName)
                 .setEmail(email)
                 .setPhoneNumber(username)
-                .setPassword(passwordEncoder.encode(password)));
+                .setPassword(passwordEncoder.encode(password)))
+                .addRole("USER");
+
+        clientService.assignRoleToClient(clientService.getUserClient().getId(), "USER");
+
+        System.out.println("роль user?: " + Arrays.toString(clientService.getUserClient().getStringRoles()));
 
         if (clientService.isExists(username)){
             System.out.println(username);

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,7 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@RequestMapping("/v1/main-page")
+@PreAuthorize("hasRole('USER')")
+@RequestMapping("/v1/user/main-page")
 public class MainPageController {
 
     private final ClientService clientService;
@@ -30,15 +30,18 @@ public class MainPageController {
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public String showMainPage(){
+    public String showMainPage(Authentication authentication){
         System.out.println("гет main page");
-        // Получаем объект Authentication из SecurityContextHolder
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Получаем коллекцию авторитетов (ролей)
+        if (authentication == null) {
+            System.out.println("Authentication объект null!");
+            return "main";
+        }
+
+        System.out.println("Аутентифицированный пользователь: " + authentication.getName());
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        // Преобразуем коллекцию авторитетов в список строковых представлений ролей
         List<String> listt = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
@@ -48,10 +51,10 @@ public class MainPageController {
         return "main";
     }
 
-    @GetMapping("/info")
+    @GetMapping("/profile")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public String getInfo(@RequestParam("name") String client_name){
-        return client_name;
+    public String getInfo(){
+        return "user-test-page";
     }
 
     @GetMapping("/all-clients")
@@ -85,7 +88,7 @@ public class MainPageController {
                 .buildAndExpand(client.getId())
                 .toUri();
 
-        return ResponseEntity.created(location).build(); // 201 Created без тела
+        return ResponseEntity.created(location).build();
     }
 
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")

@@ -1,40 +1,60 @@
 package org.example.controllers;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.entities.UserClient;
 import org.example.jwt.JWTKeyGenerator;
 import org.example.security.CustomClientDetailService;
+import org.example.security.UserFactory;
 import org.example.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Key;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/v1/login")
 public class LoginController {
 
-    private ClientService clientService;
+    private final ClientService clientService;
     private final AuthenticationManager authenticationManager;
     private final CustomClientDetailService customClientDetailService;
     private final Key jwtKey;
+    private final PasswordEncoder passwordEncoder;
+    private final UserFactory userFactory;
+
+    @Autowired
+    public LoginController(ClientService clientService,
+                           AuthenticationManager authenticationManager,
+                           CustomClientDetailService customClientDetailService,
+                           Key jwtKey,
+                           PasswordEncoder passwordEncoder,
+                           UserFactory userFactory){
+        this.authenticationManager = authenticationManager;
+        this.customClientDetailService = customClientDetailService;
+        this.clientService = clientService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtKey = jwtKey;
+        this.userFactory = userFactory;
+    }
 
     @GetMapping
     public String showLoginPage(@RequestParam(value = "error", required = false) String error,
                                 @RequestParam(value = "logout", required = false) String logout,
                                 Model model) {
-        System.out.println("гет запрос логина");
+        System.out.println("LC гет запрос логина");
         for (UserClient u: clientService.findAllClients()){
-            System.out.println(u.getPhoneNumber());
+            System.out.println("LC" + u.getPhoneNumber());
         }
         if (error != null) {
             model.addAttribute("error", "Неверный номер телефона или пароль.");
@@ -45,77 +65,64 @@ public class LoginController {
         return "login";
     }
 
-    @Autowired
-    public LoginController(ClientService clientService,
-                           AuthenticationManager authenticationManager,
-                           CustomClientDetailService customClientDetailService,
-                           Key jwtKey){
-        this.authenticationManager = authenticationManager;
-        this.customClientDetailService = customClientDetailService;
-        this.clientService = clientService;
-        this.jwtKey = jwtKey;
-    }
 
     @PostMapping
-    @ResponseBody
     public String loginUser(@RequestParam("username") String phoneNumber,
                             @RequestParam("password") String password,
                             HttpServletResponse response,
                             Model model) {
-        System.out.println("пост запрос логина по номеру: " + phoneNumber);
-        /*try {
-            // Создаем объект токена для аутентификации
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(phoneNumber, password);
+        System.out.println("LC пост запрос логина");
 
-            // Аутентификация
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        try {
 
-            // Устанавливаем аутентификацию в контекст безопасности
+            UserClient user = clientService.findByPhoneNumber(phoneNumber);
+
+            clientService.assignRoleToClient(user.getId(), "USER");
+            if (user == null) {
+                System.out.println("LC такого пользователя нет");
+                model.addAttribute("error", "Пользователь с таким номером телефона не найден.");
+                return "login";
+            }
+
+            if (!passwordEncoder.matches(password, user.getPassword())) {
+                System.out.println("LC пароли не совпали" + user.getPassword());
+                model.addAttribute("error", "Неверный пароль.");
+                return "login";
+            }
+            System.out.println("LC пароль: " + user.getPassword());
+
+            UserDetails userDetails = userFactory.createUser(user.getPhoneNumber(), user.getPassword(), user.getStringRoles());
+            System.out.println("LC роли: " + Arrays.toString(user.getStringRoles()));
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Генерация JWT
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String token = JWTKeyGenerator.generateToken(userDetails);
-
-            // Устанавливаем JWT в заголовок ответа
-            response.setHeader("Authorization", "Bearer " + token);
-
-            // Перенаправляем на главную страницу после успешного входа
-            return "redirect:/v1/main-page";
-        } catch (UsernameNotFoundException e) {
-            model.addAttribute("error", "Пользователь с таким номером телефона не найден.");
-        } catch (BadCredentialsException e) {
-            model.addAttribute("error", "Неверный пароль.");
-        } catch (Exception e) {
-            model.addAttribute("error", "Произошла ошибка. Повторите попытку.");
-        }
-        return "login";*/
-        try {
-            // Аутентификация пользователя
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(phoneNumber, password)
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);//
-
-            // Генерация JWT токена
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = JWTKeyGenerator.generateToken(userDetails, jwtKey);
 
-            // Устанавливаем JWT в заголовок ответа
-            response.setHeader("Authorization", "Bearer " + token);
-            System.out.println("JWT токен генерируется: " + token);
+            System.out.println("LC JWT токен генерируется в LoginController: " + token);
 
-            // Перенаправляем на главную страницу
-            return "redirect:/v1/main-page";
+            Cookie jwtCookie = new Cookie("JWT_TOKEN", token);
+            jwtCookie.setHttpOnly(true);   // Защита от XSS
+            jwtCookie.setSecure(false);     // только по HTTPS
+            jwtCookie.setPath("/");        // Доступ для всех страниц
+            jwtCookie.setMaxAge(3600);
+            jwtCookie.setAttribute("SameSite", "Lax"); // Защита от CSRF
+            response.addCookie(jwtCookie);
 
-        } catch (BadCredentialsException e) {
-            model.addAttribute("error", "Неверные учетные данные. Повторите попытку.");
+            System.out.println("LC: Успешная аутентификация, редирект на /v1/user/main-page");
+            System.out.println("LC роли: " + user.getRoles().toString());
+            return "redirect:/v1/user/main-page";
+            //return "login";
+
         } catch (Exception e) {
             model.addAttribute("error", "Произошла ошибка. Повторите попытку.");
+            try {
+                response.sendRedirect("/v1/login?error=exception");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return "login"; // Возврат на страницу логина с ошибкой
+        return "login";
     }
 
 }
