@@ -10,7 +10,6 @@ public class JWTConfig {
 
     @Bean
     public Key jwtSigningKey() {
-        // Генерируем ключ при запуске приложения
         return JWTKeyGenerator.generateKey();
     }
 }
