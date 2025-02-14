@@ -53,7 +53,7 @@ public class LoginController {
                                 @RequestParam(value = "logout", required = false) String logout,
                                 Model model) {
         System.out.println("LC гет запрос логина");
-        for (UserClient u: clientService.findAllClients()){
+        for (UserClient u: clientService.findAll()){
             System.out.println("LC" + u.getPhoneNumber());
         }
         if (error != null) {
@@ -79,27 +79,22 @@ public class LoginController {
 
             clientService.assignRoleToClient(user.getId(), "USER");
             if (user == null) {
-                System.out.println("LC такого пользователя нет");
                 model.addAttribute("error", "Пользователь с таким номером телефона не найден.");
                 return "login";
             }
 
             if (!passwordEncoder.matches(password, user.getPassword())) {
-                System.out.println("LC пароли не совпали" + user.getPassword());
                 model.addAttribute("error", "Неверный пароль.");
                 return "login";
             }
-            System.out.println("LC пароль: " + user.getPassword());
+
 
             UserDetails userDetails = userFactory.createUser(user.getPhoneNumber(), user.getPassword(), user.getStringRoles());
-            System.out.println("LC роли: " + Arrays.toString(user.getStringRoles()));
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             String token = JWTKeyGenerator.generateToken(userDetails, jwtKey);
-
-            System.out.println("LC JWT токен генерируется в LoginController: " + token);
 
             Cookie jwtCookie = new Cookie("JWT_TOKEN", token);
             jwtCookie.setHttpOnly(true);   // Защита от XSS
@@ -109,10 +104,7 @@ public class LoginController {
             jwtCookie.setAttribute("SameSite", "Lax"); // Защита от CSRF
             response.addCookie(jwtCookie);
 
-            System.out.println("LC: Успешная аутентификация, редирект на /v1/user/main-page");
-            System.out.println("LC роли: " + user.getRoles().toString());
             return "redirect:/v1/user/main-page";
-            //return "login";
 
         } catch (Exception e) {
             model.addAttribute("error", "Произошла ошибка. Повторите попытку.");

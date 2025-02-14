@@ -32,7 +32,6 @@ public class UserClient extends Client {
     public void addRole(String role){
         Role rol = new Role();
         rol.setRole(role);
-        System.out.println("UC userClient role: " + rol.getRole());
         roles.add(rol);
     }
 

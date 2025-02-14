@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 public class UserFactory {
 
     private final PasswordEncoder passwordEncoder;
-
-    /*@Autowired*/
     public UserFactory() {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }

@@ -22,9 +22,9 @@ public class RoleService {
     public void addRoles(Role role){
         if (!roleRepository.existsByRole(role.getRole())) {
             roleRepository.save(role);
-            System.out.println("RS такая роль еще не существует: " + role.getRole());
+
         } else {
-            System.out.println("RS такая роль уже существует: " + role.getRole());
+            throw new RuntimeException("такая роль уже существует: " + role.getRole());
         }
     }
 
