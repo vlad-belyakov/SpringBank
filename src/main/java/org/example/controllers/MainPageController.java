@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 @RequestMapping("/v1/user/main-page")
 public class MainPageController {
 
@@ -26,6 +26,13 @@ public class MainPageController {
     public MainPageController(ClientService clientService){
         System.out.println("MainPageController создан");
         this.clientService = clientService;
+    }
+
+    @GetMapping("/all-clients")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseBody
+    public List<UserClient> getAllClients(){
+        return clientService.findAll();
     }
 
     @GetMapping
@@ -38,16 +45,11 @@ public class MainPageController {
             return "main";
         }
 
-        System.out.println("Аутентифицированный пользователь: " + authentication.getName());
-
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
         List<String> listt = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
-        for (String s: listt){
-            System.out.println(s);
-        }
         return "main";
     }
 
@@ -55,13 +57,6 @@ public class MainPageController {
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public String getInfo(){
         return "user-test-page";
-    }
-
-    @GetMapping("/all-clients")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @ResponseBody
-    public List<UserClient> getAllClients(){
-        return clientService.findAll();
     }
 
     @GetMapping("/client/{id}")
