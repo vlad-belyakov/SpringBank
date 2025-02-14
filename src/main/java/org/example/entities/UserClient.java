@@ -19,22 +19,6 @@ public class UserClient extends Client {
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles = new HashSet<>();
 
-    public Set<Role> getRoles(){
-        return roles;
-    }
-
-    public String[] getStringRoles(){
-        return roles.stream()
-                .map(Role::getRole)
-                .toArray(String[]::new);
-    }
-
-    public void addRole(String role){
-        Role rol = new Role();
-        rol.setRole(role);
-        roles.add(rol);
-    }
-
     @Column(name = "client_name")
     private String name;
 
@@ -174,6 +158,22 @@ public class UserClient extends Client {
     public UserClient setId(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Set<Role> getRoles(){
+        return roles;
+    }
+
+    public String[] getStringRoles(){
+        return roles.stream()
+                .map(Role::getRole)
+                .toArray(String[]::new);
+    }
+
+    public void addRole(String role){
+        Role rol = new Role();
+        rol.setRole(role);
+        roles.add(rol);
     }
 
 }

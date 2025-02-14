@@ -62,8 +62,6 @@ public class RegistrationController {
         clientService.assignRoleToClient(clientService.getUserClient().getId(), "USER");
 
         if (clientService.isExists(username)){
-            System.out.println(username);
-            System.out.println(clientService.getUserClient().getName());
             return "redirect:/v1/login";
         }
         else {

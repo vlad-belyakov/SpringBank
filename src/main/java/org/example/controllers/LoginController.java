@@ -52,10 +52,6 @@ public class LoginController {
     public String showLoginPage(@RequestParam(value = "error", required = false) String error,
                                 @RequestParam(value = "logout", required = false) String logout,
                                 Model model) {
-        System.out.println("LC гет запрос логина");
-        for (UserClient u: clientService.findAll()){
-            System.out.println("LC" + u.getPhoneNumber());
-        }
         if (error != null) {
             model.addAttribute("error", "Неверный номер телефона или пароль.");
         }
@@ -71,13 +67,11 @@ public class LoginController {
                             @RequestParam("password") String password,
                             HttpServletResponse response,
                             Model model) {
-        System.out.println("LC пост запрос логина");
-
         try {
 
             UserClient user = clientService.findByPhoneNumber(phoneNumber);
 
-            clientService.assignRoleToClient(user.getId(), "USER");
+
             if (user == null) {
                 model.addAttribute("error", "Пользователь с таким номером телефона не найден.");
                 return "login";
@@ -88,6 +82,7 @@ public class LoginController {
                 return "login";
             }
 
+            clientService.assignRoleToClient(user.getId(), "USER");
 
             UserDetails userDetails = userFactory.createUser(user.getPhoneNumber(), user.getPassword(), user.getStringRoles());
 
