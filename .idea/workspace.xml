@@ -4,42 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1772219e-e7c1-49bf-af36-27e33e686553" name="Changes" comment="немного исправлений багов">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ClientRoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/RoleService.java" afterDir="false" />
+    <list default="true" id="1772219e-e7c1-49bf-af36-27e33e686553" name="Changes" comment="Рабочая версия приложения. Работает доступ к сайту через authority и jwt.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BankApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/AdminTestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/AdminTestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/MainPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/UserClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTKeyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTKeyGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTTokenValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/jwt/JWTTokenValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/security/UserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/security/UserFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ClientDetailsService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main-page-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main-page-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/BankApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/BankApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTKeyGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTKeyGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTTokenValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JWT/JWTTokenValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/MainPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/MainPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/entities/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/entities/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/entities/UserClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/entities/UserClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/repository/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/repository/ClientRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/security/UserFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/security/UserFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/service/ClientDetailsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/service/ClientService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +123,8 @@
       <workItem from="1737973621263" duration="20619000" />
       <workItem from="1738145941017" duration="40639000" />
       <workItem from="1738613890284" duration="32599000" />
-      <workItem from="1739190030728" duration="20293000" />
+      <workItem from="1739190030728" duration="21567000" />
+      <workItem from="1739562412844" duration="465000" />
     </task>
     <task id="LOCAL-00001" summary="добавил html страницы">
       <option name="closed" value="true" />
@@ -201,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738233634271</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Рабочая версия приложения. Работает доступ к сайту через authority и jwt.">
+      <option name="closed" value="true" />
+      <created>1739287687053</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739287687053</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,6 +206,7 @@
     <MESSAGE value="добавил html страницы" />
     <MESSAGE value="добавляю spring security" />
     <MESSAGE value="немного исправлений багов" />
-    <option name="LAST_COMMIT_MESSAGE" value="немного исправлений багов" />
+    <MESSAGE value="Рабочая версия приложения. Работает доступ к сайту через authority и jwt." />
+    <option name="LAST_COMMIT_MESSAGE" value="Рабочая версия приложения. Работает доступ к сайту через authority и jwt." />
   </component>
 </project>

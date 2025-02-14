@@ -36,8 +36,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         String requestURI = request.getRequestURI();
 
-        System.out.println("JWT Filter triggered for: " + requestURI);
-
         // Пропускаем проверку токена для страниц входа и регистрации
         if (requestURI.startsWith("/v1/login") ||
                 requestURI.startsWith("/v1/registration") ||
@@ -57,7 +55,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         // Извлекаем JWT-токен из cookie
         String token = extractJwtFromCookie(request);
-        System.out.println("token: " + token);
         if (token != null) {
             try {
                 Claims claims = JWTTokenValidator.validateToken(token, key);

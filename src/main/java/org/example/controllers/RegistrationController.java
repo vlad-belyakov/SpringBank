@@ -61,15 +61,12 @@ public class RegistrationController {
 
         clientService.assignRoleToClient(clientService.getUserClient().getId(), "USER");
 
-        System.out.println("роль user?: " + Arrays.toString(clientService.getUserClient().getStringRoles()));
-
         if (clientService.isExists(username)){
             System.out.println(username);
             System.out.println(clientService.getUserClient().getName());
             return "redirect:/v1/login";
         }
         else {
-            System.out.println("нет пользователя");
             return "registration";
         }
     }
