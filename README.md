@@ -1,4 +1,4 @@
-# Название проекта
+# Yourbank
 
 ## Описание
 Этот проект представляет собой сайт банка, разработанный с использованием Spring Boot, Spring Security и Spring Data JPA. В основе архитектуры используется паттерн Controller-Service-Repository, а также принципы SOLID и DRY.
