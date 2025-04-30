@@ -14,7 +14,6 @@ public class ClientController {
     private final ClientService clientService;
     @Autowired
     public ClientController(ClientService clientService){
-        System.out.println("hiberController создан");
         this.clientService = clientService;
     }
 

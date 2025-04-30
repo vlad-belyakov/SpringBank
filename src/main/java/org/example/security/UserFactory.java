@@ -11,17 +11,15 @@ import org.springframework.stereotype.Service;
 public class UserFactory {
 
     private final PasswordEncoder passwordEncoder;
-
-    /*@Autowired*/
     public UserFactory() {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public UserDetails createUser(String phoneNumber, String rawPassword, String role) {
+    public UserDetails createUser(String phoneNumber, String rawPassword, String[] role) {
         return User.builder()
                 .username(phoneNumber)
-                .password(passwordEncoder.encode(rawPassword))  // Шифруем пароль
-                .roles(role)                                    // Присваиваем роль
+                .password(passwordEncoder.encode(rawPassword))
+                .authorities(role)
                 .build();
     }
 

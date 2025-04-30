@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,7 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@RequestMapping("/v1/main-page")
+@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+@RequestMapping("/v1/user/main-page")
 public class MainPageController {
 
     private final ClientService clientService;
@@ -28,37 +28,35 @@ public class MainPageController {
         this.clientService = clientService;
     }
 
-    @GetMapping
-    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public String showMainPage(){
-        System.out.println("гет main page");
-        // Получаем объект Authentication из SecurityContextHolder
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Получаем коллекцию авторитетов (ролей)
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-        // Преобразуем коллекцию авторитетов в список строковых представлений ролей
-        List<String> listt = authorities.stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
-        for (String s: listt){
-            System.out.println(s);
-        }
-        return "main";
-    }
-
-    @GetMapping("/info")
-    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public String getInfo(@RequestParam("name") String client_name){
-        return client_name;
-    }
-
     @GetMapping("/all-clients")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseBody
     public List<UserClient> getAllClients(){
         return clientService.findAll();
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    public String showMainPage(Authentication authentication){
+        System.out.println("гет main page");
+
+        if (authentication == null) {
+            System.out.println("Authentication объект null!");
+            return "main";
+        }
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        List<String> listt = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+        return "main";
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    public String getInfo(){
+        return "user-test-page";
     }
 
     @GetMapping("/client/{id}")
@@ -85,7 +83,7 @@ public class MainPageController {
                 .buildAndExpand(client.getId())
                 .toUri();
 
-        return ResponseEntity.created(location).build(); // 201 Created без тела
+        return ResponseEntity.created(location).build();
     }
 
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
